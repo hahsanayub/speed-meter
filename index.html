@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .text {
+            position: absolute;
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 27px;
+            line-height: 38px;
+            left: 45%;
+            top: 25%;
+        }
+
+        .seconds {
+            position: absolute;
+            left: 42%;
+            top: 50%;
+        }
+
+        #container {
+            width: 200px;
+            height: 100px;
+            margin: auto;
+            position: relative;
+        }
+
+        #container2 {
+            width: 200px;
+            height: 100px;
+        }
+
+        svg {
+            height: 80px;
+            width: 100px;
+            fill: none;
+            stroke: #7DD740;
+            stroke-width: 10;
+            stroke-linecap: round;
+            /* -webkit-filter: drop-shadow(-3px -2px 5px gray);
+            filter: drop-shadow(-3px -2px 5px gray); */
+        }
+    </style>
+</head>
+
+<body>
+    <link href="css/plugins/c3/c3.min.css" rel="stylesheet">
+    <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/1.0.0/dist/progressbar.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600,800,900" rel="stylesheet" type="text/css">
+
+    <div style="text-align: center;">
+        <div class="text" id="speed">
+            5.2
+        </div>
+        <div class="seconds">
+            seconds
+        </div>
+        <div id="container"></div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const speed = urlParams.get('speed');
+        document.getElementById('speed').innerHTML= parseFloat(speed).toFixed(1)
+        let background = '#7DD740'
+        if(parseFloat(speed) <= 3){
+            background = "#7DD740"
+        }
+        else if(parseFloat(speed) > 3 && parseFloat(speed) <=8 ){
+            background = "#F7D46C"
+        }
+        else {
+            background = "#ef3249"
+        }
+
+
+        let value = speed
+        if(value >10){
+                value = 10
+        }
+        var stepsize = 100;
+        var bar = new ProgressBar.SemiCircle(container, {
+            strokeWidth: 3,
+            color: '#eee',
+            trailColor: '#eee',
+            trailWidth: 3,
+            easing: 'easeInOut',
+            duration: 10,
+            svgStyle: null,
+            text: {
+                value: '',
+                alignToBottom: false
+            },
+
+            // Set default step function for all animate calls
+            step: (state, bar) => {
+                bar.path.setAttribute('stroke', background);
+                // if (value === 0) {
+                //     bar.setText('');
+                // } else {
+                //     // put here database value eg. 8/10 
+                //     bar.setText(value + "/" + stepsize);
+                // }
+
+                // bar.text.style.color = state.color;
+            }
+        });
+        // bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+        // bar.text.style.fontSize = '2rem';
+
+
+        // put here percente logic out put 
+        bar.animate(value / 10); // Number from 0.0 to 1.0
+
+        // setTimeout(function () {
+        //     stepsize = Math.ceil(100);
+        //     bar.animate(0.1); // Number from 0.0 to 1.0
+        // }, 10);
+    </script>
+</body>
+
+</html>
