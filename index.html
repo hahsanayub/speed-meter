@@ -38,6 +38,7 @@
         }
 
         svg {
+            /* height: 320px; */
             width: 400px;
             fill: none;
             stroke: #7DD740;
@@ -67,7 +68,15 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const speed = urlParams.get('speed');
+
+        if(speed >=10){
+            document.getElementById('speed').innerHTML= 9.9;
+
+        }
+        else{
         document.getElementById('speed').innerHTML= parseFloat(speed).toFixed(1)
+        }
+
         let background = '#7DD740'
         if(parseFloat(speed) <= 3){
             background = "#7DD740"
@@ -81,6 +90,7 @@
 
 
         let value = speed
+       
         if(value >10){
                 value = 10
         }
