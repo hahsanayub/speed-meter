@@ -78,10 +78,10 @@
         }
 
         let background = '#7DD740'
-        if(parseFloat(speed) <= 3){
+        if(parseFloat(speed) <= 1.5){
             background = "#7DD740"
         }
-        else if(parseFloat(speed) > 3 && parseFloat(speed) <=8 ){
+        else if(parseFloat(speed) > 1.5 && parseFloat(speed) <3 ){
             background = "#F7D46C"
         }
         else {
@@ -111,27 +111,10 @@
             // Set default step function for all animate calls
             step: (state, bar) => {
                 bar.path.setAttribute('stroke', background);
-                // if (value === 0) {
-                //     bar.setText('');
-                // } else {
-                //     // put here database value eg. 8/10 
-                //     bar.setText(value + "/" + stepsize);
-                // }
-
-                // bar.text.style.color = state.color;
             }
         });
-        // bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-        // bar.text.style.fontSize = '2rem';
-
-
-        // put here percente logic out put 
         bar.animate(value / 10); // Number from 0.0 to 1.0
 
-        // setTimeout(function () {
-        //     stepsize = Math.ceil(100);
-        //     bar.animate(0.1); // Number from 0.0 to 1.0
-        // }, 10);
     </script>
 </body>
 
