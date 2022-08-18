@@ -26,8 +26,6 @@
         }
 
         #container {
-            /* width: 200px; */
-            /* height: 100px; */
             margin: auto;
             position: relative;
         }
@@ -44,16 +42,11 @@
             stroke: #7DD740;
             stroke-width: 10;
             stroke-linecap: round;
-            /* -webkit-filter: drop-shadow(-3px -2px 5px gray);
-            filter: drop-shadow(-3px -2px 5px gray); */
         }
     </style>
 </head>
 
 <body>
-    <link href="css/plugins/c3/c3.min.css" rel="stylesheet">
-    <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/1.0.0/dist/progressbar.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600,800,900" rel="stylesheet" type="text/css">
 
     <div style="text-align: center;">
         <div class="text" id="speed">
@@ -65,57 +58,54 @@
         <div id="container"></div>
     </div>
 
+
+    <svg width="200" xmlns="http//www.w3.org/2000/svg" viewBox="0 0 50 50">
+        <circle id="c2" cx="25" cy="25" r="24" stroke-width="1" stroke="#eee" fill="none" transform="rotate(-218 25 25)"
+            stroke-dasharray="85 100" pathLength="100" />
+        <circle id="c1" cx="25" cy="25" r="24" stroke-width="1" stroke="darkorange" fill="none"
+            transform="rotate(-218 25 25)" stroke-dasharray="50 100" pathLength="100" />
+    </svg>
+
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const speed = urlParams.get('speed');
 
-        if(speed >=10){
-            document.getElementById('speed').innerHTML= 9.9;
+        let c1 = document.getElementById('c1');
+        let c2 = document.getElementById('c2');
 
-        }
-        else{
-        document.getElementById('speed').innerHTML= parseFloat(speed).toFixed(1)
+        if (speed >= 10) {
+            document.getElementById('speed').innerHTML = 9.9;
+
+        } else {
+            document.getElementById('speed').innerHTML = parseFloat(speed).toFixed(1)
         }
 
         let background = '#7DD740'
-        if(parseFloat(speed) <= 1){
+        if (parseFloat(speed) <= 1) {
             background = "#7DD740"
-        }
-        else if(parseFloat(speed) > 1 && parseFloat(speed) <=2 ){
+        } else if (parseFloat(speed) > 1 && parseFloat(speed) <= 2) {
             background = "#F7D46C"
-        }
-        else {
+        } else {
             background = "#ef3249"
         }
 
 
-        let value = speed
-       
-        if(value >3){
-                value = 3
+        let speedValue = speed
+
+        if (speedValue > 3) {
+            speedValue = 3
         }
-        var stepsize = 100;
-        var bar = new ProgressBar.SemiCircle(container, {
-            strokeWidth: 3,
-            color: '#eee',
-            trailColor: '#eee',
-            trailWidth: 3,
-            easing: 'easeInOut',
-            duration: 10,
-            svgStyle: null,
-            text: {
-                value: '',
-                alignToBottom: false
-            },
+        speedValue = speedValue/3 *100
 
-            // Set default step function for all animate calls
-            step: (state, bar) => {
-                bar.path.setAttribute('stroke', background);
-            }
-        });
-        bar.animate(value / 3); // Number from 0.0 to 1.0
 
+        let calculated = (72 * speedValue) / 100
+        
+        c1.setAttribute('stroke-dasharray', `${calculated} 100`);
+        c2.setAttribute('stroke-dasharray', `72 100`);
+        c1.setAttribute('stroke', background);
     </script>
+
+
 </body>
 
 </html>
